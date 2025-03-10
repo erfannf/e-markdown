@@ -42,6 +42,7 @@ The syntax is aligned with industry standards including **ISO 10628** (flow diag
 
 The PFD markdown syntax follows a hierarchical structure with clearly defined sections, each representing a fundamental component of the process diagram:
 
+- **Limits**: Battery limits defining incoming and outgoing points where streams enter or exit the current PFD sheet, including source/destination references and descriptions
 - **Equipment**: Process vessels, reactors, columns, heat exchangers, pumps, and other physical apparatus.
 - **Streams**: Material flows with associated properties (flow rate, temperature, pressure, composition).
 - **Instruments**: Measurement devices, sensors, transmitters, and analytical equipment.
@@ -53,6 +54,41 @@ Each component is defined using a standardized **key-value pair** structure with
 ---
 
 ## 🧩 Core Components
+
+### 🚧 Limits
+Limits represent the battery boundaries of the process flow diagram, defining where streams enter or exit the current PFD sheet. They are essential for connecting multiple PFDs together in a larger process system and are defined using the syntax `[Incoming: <ID>]` or `[Outgoing: <ID>]`.
+
+#### Formal Syntax:
+```markdown
+## Limits
+### Incoming Points
+- [Incoming: <ID>, Unit=<UnitNumber>, PFD=<PFDNumber>, Location=<GridCoordinate>]
+  - Stream: [Stream: <ID>, <Properties>]
+  - Connects To: [<DestinationType>: <DestinationID>, <EquipmentType>: <EquipmentID>]
+  - Description: "<Text describing the source of this stream>"
+
+### Outgoing Points
+- [Outgoing: <ID>, Unit=<UnitNumber>, PFD=<PFDNumber>, Location=<GridCoordinate>]
+  - Stream: [Stream: <ID>, <Properties>]
+  - Connects From: [<SourceType>: <SourceID>, <EquipmentType>: <EquipmentID>]
+  - Description: "<Text describing the destination of this stream>"
+```
+
+#### Example:
+```markdown
+## Limits
+### Incoming Points
+- [Incoming: IN-501, Unit=501, PFD=501, Location=G1, Description="Feed from Storage Area"]
+  - Stream: [Stream: 1, Flow=100 m³/h, T=50°C, P=1 bar, Composition="H2O=90%, NaCl=10%"]
+  - Connects To: [Nozzle: N1, Distillation Tower: T-101]
+
+### Outgoing Points
+- [Outgoing: OUT-503, Unit=503, PFD=503, Location=G9, Description="Product to Packaging"]
+  - Stream: [Stream: 7, Flow=40 m³/h, T=35°C, P=1.5 bar, Composition="H2O=95%, NaCl=5%"]
+  - Connects From: [Nozzle: N4, Distillation Tower: T-101]
+```
+
+---
 
 ### 🏭 Equipment
 Equipment elements represent the physical processing units within the system and are defined using the syntax `[Equipment: <Type>, <ID>, <Attributes>]`. Equipment definitions may include physical specifications, operating parameters, and spatial coordinates.
@@ -163,6 +199,46 @@ Data connections represent signal pathways between instruments, controllers, and
 [Instrument: Temperature Sensor, TT-101, Grid=C5-T] -.-> [Controller: TC-101, Grid=C5-T]
 [Controller: TC-101, Grid=C5-T] -.-> [Valve: Control Valve, CV-101, Grid=C5-T]
 ```
+
+---
+
+### 🔀 Stream Intersections
+Stream intersections represent points where multiple streams merge together or a single stream splits into multiple streams. These are critical elements in process flow diagrams and are defined using the `[Intersection: <ID>, <Attributes>]` syntax.
+
+#### Formal Syntax:
+```markdown
+[Intersection: <ID>, Grid=<GridCoordinate>, Type="<MergeOrSplit>"]
+- Incoming: [Stream: <ID1>] (for merge: multiple streams, for split: single stream)
+- Outgoing: [Stream: <ID2>, Stream: <ID3>, ...] (for merge: single stream, for split: multiple streams)
+```
+
+#### Merge Example:
+```markdown
+# Two streams merging into one
+[Intersection: X-1, Grid=E7, Type="Merge"]
+- Incoming: [Stream: 2, Stream: 3]
+- Outgoing: [Stream: 4]
+```
+
+#### Split Example:
+```markdown
+# One stream splitting into two
+[Intersection: X-2, Grid=C5, Type="Split"]
+- Incoming: [Stream: 5]
+- Outgoing: [Stream: 6, Stream: 7]
+```
+
+#### Complex Example:
+```markdown
+# Multiple stream intersection with flow distribution
+[Intersection: X-3, Grid=G5, Type="Distribution"]
+- Incoming: [Stream: 8, Stream: 9]
+- Outgoing: [Stream: 10, Stream: 11, Stream: 12]
+- Distribution: [Stream: 8 -> Stream: 10 (70%), Stream: 11 (30%)]
+- Distribution: [Stream: 9 -> Stream: 12 (100%)]
+```
+
+Stream intersections can be represented visually using diamond symbols (◇) on the diagram, with connecting lines showing the flow direction between incoming and outgoing streams.
 
 ---
 
