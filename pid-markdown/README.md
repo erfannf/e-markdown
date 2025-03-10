@@ -4,7 +4,7 @@
 
 This repository will contain the **P&ID Markdown Specification**, a markdown-based syntax for creating **Piping and Instrumentation Diagrams (P&IDs)** that are both human-readable and machine-interpretable.
 
-> **Note:** This specification is currently under development. The full implementation will follow the template established by the [PFD Markdown Specification](https://github.com/erfannf/e-markdown/pfd-markdown).
+> **Note:** This specification is currently under development. The full implementation will follow the template established by the [PFD Markdown Specification](https://github.com/erfannf/e-markdown/blob/main/pfd-markdown/README.md).
 
 ## Coming Soon
 

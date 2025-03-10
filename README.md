@@ -1,5 +1,3 @@
-
-
 # e-markdown (Engineering Markdown)
 
 Welcome to the **Engineering Markdown (e-markdown)** repository! This project aims to establish standardized markdown-based syntaxes for various engineering documents, making them both human-readable and machine-interpretable.
@@ -22,6 +20,15 @@ The e-markdown project currently includes the following specifications:
 
 ### [PFD Markdown](pfd-markdown/) - Process Flow Diagrams
 A markdown syntax for creating Process Flow Diagrams (PFDs) used in chemical, petrochemical, and process industries. The specification defines how to represent equipment, streams, instruments, and their relationships.
+
+The PFD Markdown syntax includes these key components:
+
+- **Limits**: Battery limits defining incoming and outgoing points where streams enter or exit the current PFD sheet, including source/destination references and descriptions
+- **Equipment**: Process vessels, reactors, columns, heat exchangers, pumps, and other physical apparatus
+- **Streams**: Material flows with associated properties (flow rate, temperature, pressure, composition)
+- **Instruments**: Measurement devices, sensors, transmitters, and analytical equipment
+- **Valves**: Flow control, pressure regulation, and isolation devices
+- **Data Connections**: Signal pathways between instruments, controllers, and final control elements
 
 **Status:** Rev.0 - Initial specification available
 
