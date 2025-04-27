@@ -4,6 +4,17 @@ Welcome to the **Engineering Markdown (e-markdown)** repository! This project ai
 
 > **Note:** This is an emerging collection of specifications, designed to bring consistency and interoperability to engineering documentation across disciplines.
 
+## 📌 Table of Contents
+
+1. [Overview](#-overview)
+2. [Why e-markdown?](#-why-e-markdown)
+3. [Specifications](#-specifications)
+4. [Roadmap](#-roadmap)
+5. [Example](#-example)
+6. [Implementation](#-implementation)
+7. [Contributing](#-contributing)
+8. [License](#-license)
+
 ## 📌 Overview
 
 Engineering documentation has traditionally relied on specialized software tools, creating barriers to collaboration and integration. The e-markdown project addresses this by developing open, text-based specifications that can be:
@@ -14,37 +25,72 @@ Engineering documentation has traditionally relied on specialized software tools
 - **Shared** across teams without proprietary software requirements
 - **Integrated** with modern AI and automation tools
 
+## 💡 Why e-markdown?
+
+Traditional engineering documentation is often locked away in proprietary formats, making it difficult to:
+
+- Collaborate across teams and organizations
+- Integrate with modern automation, AI, and data analysis tools
+- Maintain version control and track changes
+- Ensure long-term accessibility and interoperability
+
+**e-markdown** solves these problems by providing:
+
+- **Open, human-readable formats** for all engineering disciplines
+- **Machine-parseable syntax** for easy integration with visualization and simulation tools
+- **Standardization** across industries and document types
+- **Future-proofing** of engineering knowledge and workflows
+
 ## 📚 Specifications
 
 The e-markdown project currently includes the following specifications:
 
-### [PFD Markdown](pfd-markdown/) - Process Flow Diagrams
-A markdown syntax for creating Process Flow Diagrams (PFDs) used in chemical, petrochemical, and process industries. The specification defines how to represent equipment, streams, instruments, and their relationships.
+| Specification | Description | Status | Link |
+|---------------|-------------|--------|------|
+| **PFD Markdown** | Markdown syntax for Process Flow Diagrams (PFDs) used in chemical, petrochemical, and process industries. Defines equipment, streams, instruments, and their relationships. | Rev.0 (Initial) | [pfd-markdown/](pfd-markdown/) |
+| **P&ID Markdown** | Extension of PFD Markdown for detailed Piping and Instrumentation Diagrams (P&IDs), including piping, valves, instrumentation, and control systems. | Planned | [pid-markdown/](pid-markdown/) |
+| **Electrical Diagrams** | Specification for single-line and schematic electrical diagrams. | Planned | _Coming soon_ |
+| **Civil/Structural Drawings** | Standardized markdown for foundation and structural element specifications. | Planned | _Coming soon_ |
+| **Material Specifications** | Standardized material property documentation. | Planned | _Coming soon_ |
+| **Test Procedures** | Structured test methodology documentation. | Planned | _Coming soon_ |
 
-The PFD Markdown syntax includes these key components:
+> See each specification directory for detailed syntax, examples, and best practices.
 
-- **Limits**: Battery limits defining incoming and outgoing points where streams enter or exit the current PFD sheet, including source/destination references and descriptions
-- **Equipment**: Process vessels, reactors, columns, heat exchangers, pumps, and other physical apparatus
-- **Streams**: Material flows with associated properties (flow rate, temperature, pressure, composition)
-- **Instruments**: Measurement devices, sensors, transmitters, and analytical equipment
-- **Valves**: Flow control, pressure regulation, and isolation devices
-- **Data Connections**: Signal pathways between instruments, controllers, and final control elements
+## 🗺️ Roadmap
 
-**Status:** Rev.0 - Initial specification available
+| Milestone                | Description                                                      | Status         | Target Date   |
+|--------------------------|------------------------------------------------------------------|---------------|--------------|
+| PFD Markdown Rev.0       | Initial release of Process Flow Diagram markdown specification   | ✅ Released    | 2024-06       |
+| P&ID Markdown Draft      | Draft specification for Piping and Instrumentation Diagrams      | 🚧 In Progress | Q1 2025       |
+| Electrical Diagrams Spec | Initial draft for electrical single-line/schematic diagrams      | ⏳ Planned     | Q2 2025       |
+| Civil/Structural Spec    | Draft for civil/structural markdown specification                | ⏳ Planned     | Q3 2025       |
+| Material Specs           | Standardized material property documentation                     | ⏳ Planned     | Q3 2025       |
+| Test Procedures Spec     | Structured test methodology documentation                        | ⏳ Planned     | Q4 2025       |
 
-### [P&ID Markdown](pid-markdown/) - Piping and Instrumentation Diagrams
-An extension of PFD Markdown that adds detailed piping specifications, comprehensive instrumentation details, and control system integration for creating Piping and Instrumentation Diagrams (P&IDs).
+## 📝 Example
 
-**Status:** Planned - Development roadmap available
+Here's a minimal example of a Process Flow Diagram (PFD) using e-markdown syntax:
 
-### Future Specifications
+```markdown
+# Example: Simple Distillation PFD
 
-We plan to develop additional specifications for:
+## Limits
+- [Incoming: IN-101, Description="Feed from Storage"]
+  - Stream: [Stream: 1, Flow=100 m³/h, T=50°C, P=1 bar]
+  - Connects To: [Nozzle: N1, Distillation Tower: T-101]
 
-- **Electrical Diagrams** - Single-line and schematic representations
-- **Civil/Structural Drawings** - Foundation and structural element specifications
-- **Material Specifications** - Standardized material property documentation
-- **Test Procedures** - Structured test methodology documentation
+## Equipment
+[Equipment: Distillation Tower, T-101, Height=30m, Diameter=2m, Location=C5]
+- [Nozzle: N1, Location=Top, Grid=C5-T]
+- [Nozzle: N2, Location=Bottom, Grid=C5-B]
+
+## Streams
+[Stream: 1, Flow=100 m³/h, T=50°C, P=1 bar, Path=G1 -> C5-T]
+- From: [Incoming: IN-101]
+- To: [Nozzle: N1, Distillation Tower: T-101]
+```
+
+> See [pfd-markdown/README.md](pfd-markdown/README.md) for full syntax and advanced examples.
 
 ## 🛠️ Implementation
 
